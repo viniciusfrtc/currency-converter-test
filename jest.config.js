@@ -1,9 +1,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  testMatch: [
-    '**/__tests__/**/*.test.+(ts|tsx|js)',
-  ],
+  testMatch: ['**/__tests__/**/*.test.+(ts|tsx|js)'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
@@ -14,6 +12,6 @@ module.exports = {
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@constants/(.*)$': '<rootDir>/src/constants/$1',
     '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
-    },
-    setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts']
+  },
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
 };

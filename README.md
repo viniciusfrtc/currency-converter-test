@@ -41,3 +41,4 @@ As mentioned below, those would be my next steps:
 - Move fetch from CNB to backend, with some extra logic to get the freshest daily exchange rates as soon as it releases
 - e2e tests
 - Components tests
+- i18n

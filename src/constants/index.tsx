@@ -56,4 +56,6 @@ export const STRINGS = {
   ONLY_NUMBERS_ALLOWED: 'Only positive numbers are allowed',
   SELECT_CURRENCY: 'Select currency:',
   CONVERT: 'Convert',
+  ERROR_TITLE: 'Something went wrong.',
+  ERROR_MESSAGE: 'An unexpected error occurred. Please refresh the page or try again later.',
 };

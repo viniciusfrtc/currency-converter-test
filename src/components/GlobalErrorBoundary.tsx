@@ -1,3 +1,4 @@
+import { STRINGS } from '@/constants';
 import React, { Component, ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -33,8 +34,8 @@ export class GlobalErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoun
     if (this.state.hasError) {
       return (
         <ErrorContainer>
-          <h1>Something went wrong.</h1>
-          <p>An unexpected error occurred. Please refresh the page or try again later.</p>
+          <h1>{STRINGS.ERROR_TITLE}</h1>
+          <p>{STRINGS.ERROR_MESSAGE}</p>
         </ErrorContainer>
       );
     }

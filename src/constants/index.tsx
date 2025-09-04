@@ -4,6 +4,8 @@ export const HOUR_IN_MS = 1000 * 60 * 60;
 
 export const EXCHANGE_RATES_CACHE_KEY = 'dailyExchangeRates';
 
+export const MAX_LENGTH = 12;
+
 export const THEME: Theme = {
   colors: {
     primary: '#3498db',
@@ -50,7 +52,7 @@ export const THEME: Theme = {
 export const STRINGS = {
   CONVERTER_TITLE: 'Currency Converter',
   AMOUNT_IN_CZK: 'Insert amount in CZK:',
-  ONLY_NUMBERS_ALLOWED: 'Only numbers are allowed',
+  ONLY_NUMBERS_ALLOWED: 'Only positive numbers are allowed',
   SELECT_CURRENCY: 'Select currency:',
   CONVERT: 'Convert',
 };

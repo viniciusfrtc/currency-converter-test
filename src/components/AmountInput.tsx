@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import { STRINGS } from '@/constants';
+import { STRINGS, MAX_LENGTH } from '@/constants';
 import InputContainer from '@/components/InputContainer';
 import InputTitle from '@/components/InputTitle';
 
@@ -38,6 +38,10 @@ const isInputValid = (inputValue: string) => {
   return (Number.isInteger(num) && num > 0) || inputValue === '';
 };
 
+const isInputTooLong = (inputValue: string) => {
+  return inputValue.length > MAX_LENGTH;
+};
+
 interface CurrencyInputProps {
   amount: number | undefined;
   setAmount: (value: number) => void;
@@ -47,6 +51,9 @@ const CurrencyInput = ({ amount, setAmount }: CurrencyInputProps) => {
   const [validationError, setValidationError] = useState<boolean>(false);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+    if (isInputTooLong(inputValue)) {
+      return;
+    }
     if (isInputValid(inputValue)) {
       setAmount(Number(inputValue));
       setValidationError(false);

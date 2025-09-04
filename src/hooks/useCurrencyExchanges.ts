@@ -3,7 +3,7 @@ import { HOUR_IN_MS, EXCHANGE_RATES_CACHE_KEY } from '@/constants';
 import { ExchangeRate, CacheData, RatesData } from '@/types';
 
 export default () => {
-  const { data: exchangeRates, error } = useSuspenseQuery<ExchangeRate[]>({
+  const { data: exchangeRates } = useSuspenseQuery<ExchangeRate[]>({
     queryKey: ['daily-exchange-rates'],
     queryFn: async () => {
       const cache = localStorage.getItem(EXCHANGE_RATES_CACHE_KEY) as string;
@@ -27,6 +27,5 @@ export default () => {
 
   return {
     exchangeRates,
-    error,
   };
 };

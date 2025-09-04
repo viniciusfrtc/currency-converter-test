@@ -6,11 +6,6 @@ import { AppContext } from '@/contexts/AppContext';
 import { useContext } from 'react';
 import { ExchangeRate } from '@/types';
 
-const Label = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes.medium};
-  color: ${({ theme }) => theme.colors.secondary};
-`;
-
 const Select = styled.select`
   padding: ${({ theme }) => theme.paddings.small};
   border: 2px solid ${({ theme }) => theme.colors.secondary};
@@ -32,12 +27,10 @@ const parseExchangeRateLabel = (exchangeRate: ExchangeRate) => {
 };
 
 interface CurrencyInputProps {
-  value: ExchangeRate | undefined;
-  onChange: (value: ExchangeRate) => void;
-  label?: string;
+  setExchangeRate: (value: ExchangeRate) => void;
 }
 
-const CurrencyInput = ({ value, onChange, label }: CurrencyInputProps) => {
+const CurrencyInput = ({ setExchangeRate }: CurrencyInputProps) => {
   const { exchangeRates } = useContext(AppContext);
   const exchangeRatesMap = exchangeRates.reduce(
     (acc, exchangeRate) => {
@@ -49,11 +42,10 @@ const CurrencyInput = ({ value, onChange, label }: CurrencyInputProps) => {
   return (
     <InputContainer>
       <InputTitle>{STRINGS.SELECT_CURRENCY}</InputTitle>
-      {label && <Label>{label}</Label>}
       <Select
-        value={parseExchangeRateLabel(value || exchangeRates[0]!)}
+        defaultValue={parseExchangeRateLabel(exchangeRates[0]!)}
         onChange={(e) => {
-          onChange(exchangeRatesMap[e.target.value as ExchangeRate['currencyCode']]!);
+          setExchangeRate(exchangeRatesMap[e.target.value as ExchangeRate['currencyCode']]!);
           e.target.blur();
         }}
       >

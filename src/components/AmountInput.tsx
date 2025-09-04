@@ -9,7 +9,7 @@ const InputField = styled.input`
   border: 2px solid ${({ theme }) => theme.colors.secondary};
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   font-size: ${({ theme }) => theme.fontSizes.medium};
-  text-align: center;
+  text-align: left;
   outline: none;
 
   &:focus {
@@ -39,16 +39,16 @@ const isInputValid = (inputValue: string) => {
 };
 
 interface CurrencyInputProps {
-  value: number | undefined;
-  onChange: (value: number) => void;
+  amount: number | undefined;
+  setAmount: (value: number) => void;
 }
 
-const CurrencyInput = ({ value, onChange }: CurrencyInputProps) => {
+const CurrencyInput = ({ amount, setAmount }: CurrencyInputProps) => {
   const [validationError, setValidationError] = useState<boolean>(false);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (isInputValid(inputValue)) {
-      onChange(Number(inputValue));
+      setAmount(Number(inputValue));
       setValidationError(false);
     } else {
       setValidationError(true);
@@ -59,7 +59,7 @@ const CurrencyInput = ({ value, onChange }: CurrencyInputProps) => {
       <InputTitle>{STRINGS.AMOUNT_IN_CZK}</InputTitle>
       <InputField
         type="text"
-        value={value || ''}
+        value={amount || ''}
         onChange={handleInputChange}
         onBlur={() => setValidationError(false)}
       />

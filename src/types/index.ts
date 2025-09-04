@@ -2,6 +2,7 @@ export type ExchangeRate = {
   country: string;
   currencyCode: string;
   rate: number;
+  amount: number;
 };
 
 export type RatesData = { rates: ExchangeRate[] };
@@ -13,6 +14,7 @@ export interface CacheData extends RatesData {
 export interface Theme {
   colors: {
     primary: string;
+    primaryHover: string;
     secondary: string;
     background: string;
     whiteBackground: string;

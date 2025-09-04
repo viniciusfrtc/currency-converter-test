@@ -7,6 +7,7 @@ export const EXCHANGE_RATES_CACHE_KEY = 'dailyExchangeRates';
 export const THEME: Theme = {
   colors: {
     primary: '#3498db',
+    primaryHover: '#09619c',
     secondary: '#868687',
     background: '#f2f4f7',
     whiteBackground: '#fff',
@@ -48,7 +49,8 @@ export const THEME: Theme = {
 
 export const STRINGS = {
   CONVERTER_TITLE: 'Currency Converter',
-  AMOUNT_IN_CZK: 'Amount in CZK:',
+  AMOUNT_IN_CZK: 'Insert amount in CZK:',
   ONLY_NUMBERS_ALLOWED: 'Only numbers are allowed',
   SELECT_CURRENCY: 'Select currency:',
+  CONVERT: 'Convert',
 };

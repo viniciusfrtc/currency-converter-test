@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { STRINGS } from '@/constants';
 import AmountInput from '@/components/AmountInput';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CurrencyInput from '@/components/CurrencyInput';
 import { ExchangeRate } from '@/types';
+import SubmitButton from '@/components/SubmitButton';
+import convertCzkToCurrency from '@/utils/convertCzkToCurrency';
+import Separator from '@/components/Separator';
+import { AppContext } from '@/contexts/AppContext';
 
 const ConverterContainer = styled.div`
   display: flex;
@@ -24,13 +28,44 @@ const Title = styled.span`
 `;
 
 const Converter = () => {
-  const [value, setValue] = useState<number>();
-  const [currencyToConvert, setCurrencyToConvert] = useState<ExchangeRate | undefined>();
+  const { exchangeRates } = useContext(AppContext);
+  const [amount, setAmount] = useState<number>();
+  const [exchangeRate, setExchangeRate] = useState<ExchangeRate>(exchangeRates[0]!);
+  const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
+  const isConversionEnabled = !!amount && !!exchangeRate;
+  const showResult = isConversionEnabled && !!convertedAmount;
+
+  const convertAmount = (amount: number, exchangeRate: ExchangeRate) => {
+    const convertedAmount = convertCzkToCurrency(amount, exchangeRate);
+    setConvertedAmount(convertedAmount);
+  };
+
   return (
     <ConverterContainer>
       <Title>{STRINGS.CONVERTER_TITLE}</Title>
-      <AmountInput value={value} onChange={setValue} />
-      <CurrencyInput value={currencyToConvert} onChange={setCurrencyToConvert} />
+      <AmountInput
+        amount={amount}
+        setAmount={(amount) => {
+          setAmount(amount);
+          setConvertedAmount(null);
+        }}
+      />
+      <CurrencyInput
+        setExchangeRate={(exchangeRate) => {
+          setExchangeRate(exchangeRate);
+          setConvertedAmount(null);
+        }}
+      />
+      <SubmitButton
+        disabled={!isConversionEnabled}
+        onClick={() => isConversionEnabled && convertAmount(amount, exchangeRate)}
+      />
+      <Separator />
+      {showResult && (
+        <>
+          {amount} CZK = {convertedAmount} {exchangeRate.currencyCode}
+        </>
+      )}
     </ConverterContainer>
   );
 };

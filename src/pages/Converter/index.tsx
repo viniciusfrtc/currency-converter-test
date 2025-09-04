@@ -60,9 +60,9 @@ const Converter = () => {
         disabled={!isConversionEnabled}
         onClick={() => isConversionEnabled && convertAmount(amount, exchangeRate)}
       />
-      <Separator />
       {showResult && (
         <>
+          <Separator />
           {amount} CZK = {convertedAmount} {exchangeRate.currencyCode}
         </>
       )}

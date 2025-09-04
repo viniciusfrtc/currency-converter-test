@@ -52,6 +52,7 @@ export interface Theme {
     normal: string;
     bold: string;
   };
+  fontFamily: string;
 }
 
 export interface AppContextType {

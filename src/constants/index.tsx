@@ -47,6 +47,7 @@ export const THEME: Theme = {
     normal: '400',
     bold: '700',
   },
+  fontFamily: 'sans-serif',
 };
 
 export const STRINGS = {

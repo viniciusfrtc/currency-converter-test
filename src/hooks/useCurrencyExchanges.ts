@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { HOUR_IN_MS, EXCHANGE_RATES_CACHE_KEY } from '@/constants';
 import { ExchangeRate, CacheData, RatesData } from '@/types';
+import isRatesDataValid from '@/utils/validateExchangeRates';
 
 export default () => {
   const { data: exchangeRates } = useSuspenseQuery<ExchangeRate[]>({
@@ -16,11 +17,14 @@ export default () => {
       );
       if (!res.ok) throw new Error('Failed to fetch CNB exchange rates');
       const parsedRes = (await res.json()) as RatesData;
-      localStorage.setItem(
-        EXCHANGE_RATES_CACHE_KEY,
-        JSON.stringify({ rates: parsedRes.rates, expires: Date.now() + HOUR_IN_MS }),
-      );
-      return parsedRes.rates;
+      if (isRatesDataValid(parsedRes?.rates ?? [])) {
+        localStorage.setItem(
+          EXCHANGE_RATES_CACHE_KEY,
+          JSON.stringify({ rates: parsedRes.rates, expires: Date.now() + HOUR_IN_MS }),
+        );
+        return parsedRes.rates;
+      }
+      throw new Error('Invalid rates data');
     },
     staleTime: HOUR_IN_MS,
   });

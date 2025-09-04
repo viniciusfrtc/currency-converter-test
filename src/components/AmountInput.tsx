@@ -42,12 +42,12 @@ const isInputTooLong = (inputValue: string) => {
   return inputValue.length > MAX_LENGTH;
 };
 
-interface CurrencyInputProps {
+interface AmountInputProps {
   amount: number | undefined;
   setAmount: (value: number) => void;
 }
 
-const CurrencyInput = ({ amount, setAmount }: CurrencyInputProps) => {
+const AmountInput = ({ amount, setAmount }: AmountInputProps) => {
   const [validationError, setValidationError] = useState<boolean>(false);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -75,4 +75,4 @@ const CurrencyInput = ({ amount, setAmount }: CurrencyInputProps) => {
   );
 };
 
-export default CurrencyInput;
+export default AmountInput;
